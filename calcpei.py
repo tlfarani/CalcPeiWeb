@@ -183,7 +183,11 @@ if st.sidebar.button("Calcular Dimensionamento", type="primary"):
             col_a, col_b = st.columns(2)
             # Aplicando a formatação BR com 4 casas decimais para o VPC como estava no VB
             col_a.metric("Volume de Pior Caso Calculado (Vpc)", f"{fmt_br(Vpc, 4)} m³")
-            col_b.info(f"**Ambiente:** {local}")
+            col_b.markdown(f"""
+                <div style="background-color: #EBF5EE; color: #2A5C34; padding: 15px; border-radius: 0.5rem; border-left: 5px solid #2A5C34; font-size: 1rem; line-height: 1.5;">
+                    <strong>Ambiente:</strong> {local}
+                </div>
+            """, unsafe_allow_html=True)
 
             # --- TABELA 1: BARREIRAS ---
             st.subheader("Barreiras e Materiais Absorventes")
