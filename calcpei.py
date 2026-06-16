@@ -17,11 +17,17 @@ st.set_page_config(page_title="CalcPEI - Mac & Nuvem", page_icon="💧", layout=
 st.title("Calculadora PEI (CalcPEI)")
 st.caption("Dimensionamento de Capacidade Mínima de Resposta - Resolução CONAMA nº 398/2008")
 
-# --- FORÇAR CENTRALIZAÇÃO DAS TABELAS ---
+# --- FORÇAR CENTRALIZAÇÃO E ESTILO DOS CABEÇALHOS DAS TABELAS ---
 st.markdown("""
     <style>
+    /* Centraliza todas as células e cabeçalhos */
     [data-testid="stTable"] th, [data-testid="stTable"] td {
         text-align: center !important;
+    }
+    /* Destaca o cabeçalho com fundo verde musgo do Ibama e texto branco */
+    [data-testid="stTable"] th {
+        background-color: #2A5C34 !important;
+        color: #FFFFFF !important;
     }
     </style>
 """, unsafe_allow_html=True)
