@@ -97,7 +97,7 @@ elif tipo_instalacao == "Plataformas de perfuração exploratória ou de desenvo
         **V1** = volume diário estimado (1) decorrente da perda de controle do poço x 30 dias  
         
         *(1) Para estimativa do volume diário decorrente da perda de controle do poço deverão ser consideradas as características conhecidas do reservatório. Se estas características forem desconhecidas, devem ser consideradas as características de reservatórios análogos. A estimativa do volume diário deverá ser acompanhada de justificativa técnica.*  
-                                  """)                                 )
+                                  """)
     Vpc = v1c
 
 elif tipo_instalacao == "Plataformas de produção":
