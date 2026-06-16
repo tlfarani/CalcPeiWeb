@@ -119,7 +119,14 @@ elif tipo_instalacao == "Plataformas de produção":
     Vpc = v1d + v2d
 
 elif tipo_instalacao == "Instalações terrestres de produção":
-    v1e = st.sidebar.number_input("Volume V1 (m³):", min_value=0.0, value=0.0)
+    v1e = st.sidebar.number_input("Volume V1 (m³):", min_value=0.0, value=0.0,
+        help="""
+        **Vpc = V1, onde**:  
+        **Vpc** — volume do derramamento correspondente ao cenário de pior caso 
+        **V1** — volume diário estimado $$^{(1)}$$ decorrente da perda de controle do poço de maior vazão associado à instalação x 30 dias 
+        
+        *(1) Para estimativa do volume diário decorrente da perda de controle do poço deverão ser consideradas as características conhecidas do reservatório. A estimativa do volume diário deverá ser acompanhada de justificativa técnica.*
+        """)
     Vpc = v1e
 
 elif tipo_instalacao == "Operações de carga e descarga":
