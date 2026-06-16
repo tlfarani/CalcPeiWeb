@@ -147,21 +147,24 @@ if st.sidebar.button("Calcular Dimensionamento", type="primary"):
         CNRdm = Cdm / 24 / 0.2
         Armazdm = CNRdm * 3
 
-        # 2. Cálculos de Pior Caso por Localidade
+        # 2. Cálculos de Pior Caso por Localidade (Corrigido com correspondência exata)
         Cdpc1, Cdpc2, Cdpc3 = 0.0, 0.0, 0.0
-        if "Zona Costeira" in local:
+        
+        if local == "Zona Costeira, lagos, represas e outros lenticos":
             if Vpc >= 15200:
                 Cdpc1, Cdpc2, Cdpc3 = 2400.0, 4800.0, 8000.0
             else:
                 Cdpc1, Cdpc2, Cdpc3 = 0.15 * Vpc, 0.3 * Vpc, 0.55 * Vpc
-        elif "Rios" in local:
+                
+        elif local == "Rios e outros ambientes lóticos":
             Cdpc1, Cdpc2, Cdpc3 = 320.0, 640.0, 1140.0
-        elif "Águas marítimas" in local:
+            
+        elif local == "Águas marítimas além da Zona Costeira":
             if Vpc >= 11200:
                 Cdpc1, Cdpc2, Cdpc3 = 1600.0, 3200.0, 6400.0
             else:
                 Cdpc1, Cdpc2, Cdpc3 = 0.15 * Vpc, 0.3 * Vpc, 0.55 * Vpc
-
+        
         # Normalizações do VB
         if Cdpc1 <= Cdm: Cdpc1 = Cdm
         if Cdpc2 <= Cdpc1: Cdpc2 = Cdpc1
