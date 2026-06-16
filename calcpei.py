@@ -168,7 +168,8 @@ local = st.sidebar.radio(
 st.sidebar.header("4. Estratégia de Resposta")
 comprimento = st.sidebar.number_input("Comprimento do navio/fonte (m):", min_value=0.0, value=0.0)
 # Nota informativa fixa da imagem anexa
-st.sidebar.caption("Contenção da mancha de óleo: \n De acordo com o cálculo da capacidade efetiva diária")
+st.sidebar.caption("""Contenção da mancha de óleo: 
+De acordo com o cálculo da capacidade efetiva diária""")
 largura = st.sidebar.number_input("Largura do corpo hídrico (m):", min_value=0.0, value=0.0)
 velocidade = st.sidebar.number_input("Velocidade máxima da corrente (nós/m/s):", min_value=0.0, value=0.0)
 linha_protecao = st.sidebar.number_input("Comprimento da linha de proteção (m):", min_value=0.0, value=0.0)
