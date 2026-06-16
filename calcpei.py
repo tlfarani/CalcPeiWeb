@@ -177,15 +177,15 @@ st.sidebar.caption("""Contenção da mancha de óleo:""",
 
 largura = st.sidebar.number_input("Largura do corpo hídrico (m):", min_value=0.0, value=0.0,
         help="""
-        Cerco completo do navio ou da fonte de derramamento
+        Proteção de rios, canais e outros corpos hídricos
         """)
 velocidade = st.sidebar.number_input("Velocidade máxima da corrente (nós/m/s):", min_value=0.0, value=0.0,
         help="""
-        Cerco completo do navio ou da fonte de derramamento
+        Proteção de rios, canais e outros corpos hídricos
         """)
 linha_protecao = st.sidebar.number_input("Comprimento da linha de proteção (m):", min_value=0.0, value=0.0,
         help="""
-        Cerco completo do navio ou da fonte de derramamento
+        Proteção áreas ecologicamente sensíveis
         """)
 
 # --- PASSO 3: BOTÃO DE CÁLCULO E LÓGICA MATEMÁTICA ---
