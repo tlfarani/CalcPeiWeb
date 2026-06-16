@@ -93,7 +93,6 @@ elif tipo_instalacao == "Plataformas de perfuração exploratória ou de desenvo
     v1c = st.sidebar.number_input("Volume V1 (m³):", min_value=0.0, value=0.0,
         help="""
         **Vpc = V1, onde**:  
-        
         **Vpc** - volume do derramamento correspondente à descarga de pior caso  
         **V1** - volume diário estimado (1) decorrente da perda de controle do poço x 30 dias  
         
