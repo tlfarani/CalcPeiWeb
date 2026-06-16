@@ -72,8 +72,9 @@ if tipo_instalacao == "Tanques, equipamentos de processo e navios":
 
 elif tipo_instalacao == "Dutos":
     t1b = st.sidebar.number_input("Tempo T1 (h):", min_value=0.0, value=0.0,
-        help="""
-        **$Vpc = (T1 + T2) \times Q1 + V1$, onde:**  
+        help=r"""
+        $Vpc = (T1 + T2) \times Q1 + V1$ 
+        **Onde:**  
         **Vpc** - volume do derramamento correspondente à descarga de pior caso  
         **T1** - tempo estimado para detecção do derramamento  
         **T2** - tempo estimado entre a detecção do derramamento e a interrupção da operação de transferência  
