@@ -220,14 +220,4 @@ if st.sidebar.button("Calcular Dimensionamento", type="primary"):
                 }
                 
             df_recolhedores = pd.DataFrame(dados_recolhedores)
-
             st.table(df_recolhedores)
-
-            
-            # Força o alinhamento central total na tabela dinâmica de recolhedores
-            styled_recolhedores = df_recolhedores.style.set_table_styles([
-                {'selector': 'th', 'props': [('text-align', 'center')]},
-                {'selector': 'td', 'props': [('text-align', 'center')]}
-            ]).set_properties(**{'text-align': 'center'})
-            
-            st.table(styled_recolhedores)
