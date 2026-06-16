@@ -170,7 +170,6 @@ comprimento = st.sidebar.number_input("Comprimento do navio/fonte (m):", min_val
 
 # Nota informativa fixa da imagem anexa
 st.sidebar.caption("""Contenção da mancha de óleo: 
-
 De acordo com o cálculo da capacidade efetiva diária de recolhimento de óleo - CEDRO (Fonte: Petrobras 2011)
 """)
 
