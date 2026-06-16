@@ -146,7 +146,13 @@ elif tipo_instalacao == "Operações de carga e descarga":
     Vpc = (t1f + t2f) * q1f
 
 elif tipo_instalacao == "Plataformas de armazenamento associadas a plataformas de produção":
-    v1g = st.sidebar.number_input("Volume V1 (m³):", min_value=0.0, value=0.0)
+    v1g = st.sidebar.number_input("Volume V1 (m³):", min_value=0.0, value=0.0,
+        help="""
+        **Vpc = V1, onde**:  
+        
+        **Vpc** - volume do derramamento correspondente à descarga de pior caso
+        **V1** - volume correspondente à maior soma da capacidade de dois tanques de armazenamento adjacentes.
+        """)
     Vpc = v1g
 
 # --- 3. LOCAL DO DERRAMAMENTO ---
