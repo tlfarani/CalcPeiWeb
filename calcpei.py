@@ -100,34 +100,6 @@ largura = st.sidebar.number_input("Largura do corpo hídrico (m):", min_value=0.
 velocidade = st.sidebar.number_input("Velocidade máxima da corrente (nós/m/s):", min_value=0.0, value=0.0)
 linha_protecao = st.sidebar.number_input("Comprimento da linha de proteção (m):", min_value=0.0, value=0.0)
 
-# ==============================================================================
-# SUBSTITUA O BLOCO DO POPOVER ANTERIOR POR ESTE:
-# ==============================================================================
-st.sidebar.markdown("---")
-with st.sidebar.popover("📝 Ver Notas do Programa", use_container_width=True):
-    st.markdown("""
-    ### NOTAS
-
-    **I -** Esse software contempla apenas o dimensionamento de materiais para capacidade mínima de resposta, conforme especificado na Resolução CONAMA nº 398/2008: barreiras de contenção, barreiras de absorção, mantas de absorção, materiais de absorção à granel, recolhedores e tanques de armazenamento temporário.
-
-    **II -** Materiais complementares e acessórios, a exemplo de embarcações, barras de reboque (towbar), âncoras, veículos, sopradores, bombas, mangotes, cabos e etc., devem compor o Plano de Emergência Individual nos quantitativos suficientes para atender as estratégias de resposta e a realidade do local.
-
-    **III -** A capacidade de resposta da instalação deverá ser assegurada por meio de recursos próprios ou de terceiros provenientes de acordos previamente firmados, obedecidos os critérios de descargas pequenas (8 m³) e médias (até 200 m³) e de pior caso.
-
-    **IV -** O cálculo do volume da descarga de pior caso para a determinação da CEDRO requerida para plataformas deverá considerar o volume decorrente da perda de controle do poço durante 4 dias, demonstrando capacidade de manutenção da estrutura de resposta durante 30 dias, mantendo-se as demais orientações da seção 2.2.1 do Anexo II.
-
-    **V -** Em portos organizados e demais instalações portuárias, e terminais, deverá ser incluído o cenário de derramamento de óleo por navios dentro dos seguintes limites:
-    * **1 - Terminais de óleo:** a CEDRO deverá ser dimensionada para descargas pequena e média. No caso de derramamento de óleo acima de 200 m³, a instalação deverá apresentar as ações previstas para garantir a continuidade de resposta ao atendimento da emergência.  
-    * **2 - Portos organizados, demais instalações portuárias e outros terminais:** a CEDRO deverá ser dimensionada para descarga pequena. No caso de derramamento de óleo acima de 8 m³, a instalação deverá apresentar as ações previstas para garantir a continuidade de resposta ao atendimento da emergência.  
-
-    **VI -** As plataformas deverão estar equipadas com o conjunto de equipamentos e materiais estabelecidos inerentes ao Plano de Emergência de Navios para Poluição por Óleo (Shipboard Oil Pollution Emergency Plan - SOPEP, em inglês), conforme definido na Convenção Internacional para a Prevenção da Poluição Causada por Navios, concluída em Londres, em 2 de novembro de 1973, seu Protocolo, concluído em Londres, em 17 de fevereiro de 1998, suas Emendas de 1984 e seus anexos Operacionais III, IV e V, promulgada no Brasil por meio do Decreto nº 2.508, de 4 de março de 1998. Republicada por ter saído com incorreção, do original, no Diário Oficial da União de 27 de fevereiro de 2002, Seção 1, págs. 128 a 133.  
-
-    **VII -** A expressão "1,5 + velocidade máxima da corrente em nós x largura do corpo hídrico, em metros", contida no Anexo III da Resolução CONAMA nº 398/2008, foi alterada neste software para "(1,5 + velocidade máxima da corrente em nós) x largura do corpo hídrico, em metros", por questão de coerência.  
-
-    **VIII -** Recomenda-se leitura atenta da Resolução CONAMA nº 398/2008, para consideração de situações particulares especificadas.
-    """)
-st.sidebar.markdown("---")
-
 # --- PASSO 3: BOTÃO DE CÁLCULO E LÓGICA MATEMÁTICA ---
 if st.sidebar.button("Calcular Dimensionamento", type="primary"):
     
@@ -255,3 +227,31 @@ if st.sidebar.button("Calcular Dimensionamento", type="primary"):
                 
             df_recolhedores = pd.DataFrame(dados_recolhedores)
             st.table(df_recolhedores)
+
+# ==============================================================================
+# SUBSTITUA O BLOCO DO POPOVER ANTERIOR POR ESTE:
+# ==============================================================================
+st.sidebar.markdown("---")
+with st.sidebar.popover("📝 Ver Notas do Programa", use_container_width=True):
+    st.markdown("""
+    ### NOTAS
+
+    **I -** Esse software contempla apenas o dimensionamento de materiais para capacidade mínima de resposta, conforme especificado na Resolução CONAMA nº 398/2008: barreiras de contenção, barreiras de absorção, mantas de absorção, materiais de absorção à granel, recolhedores e tanques de armazenamento temporário.
+
+    **II -** Materiais complementares e acessórios, a exemplo de embarcações, barras de reboque (towbar), âncoras, veículos, sopradores, bombas, mangotes, cabos e etc., devem compor o Plano de Emergência Individual nos quantitativos suficientes para atender as estratégias de resposta e a realidade do local.
+
+    **III -** A capacidade de resposta da instalação deverá ser assegurada por meio de recursos próprios ou de terceiros provenientes de acordos previamente firmados, obedecidos os critérios de descargas pequenas (8 m³) e médias (até 200 m³) e de pior caso.
+
+    **IV -** O cálculo do volume da descarga de pior caso para a determinação da CEDRO requerida para plataformas deverá considerar o volume decorrente da perda de controle do poço durante 4 dias, demonstrando capacidade de manutenção da estrutura de resposta durante 30 dias, mantendo-se as demais orientações da seção 2.2.1 do Anexo II.
+
+    **V -** Em portos organizados e demais instalações portuárias, e terminais, deverá ser incluído o cenário de derramamento de óleo por navios dentro dos seguintes limites:
+    * **1 - Terminais de óleo:** a CEDRO deverá ser dimensionada para descargas pequena e média. No caso de derramamento de óleo acima de 200 m³, a instalação deverá apresentar as ações previstas para garantir a continuidade de resposta ao atendimento da emergência.  
+    * **2 - Portos organizados, demais instalações portuárias e outros terminais:** a CEDRO deverá ser dimensionada para descarga pequena. No caso de derramamento de óleo acima de 8 m³, a instalação deverá apresentar as ações previstas para garantir a continuidade de resposta ao atendimento da emergência.  
+
+    **VI -** As plataformas deverão estar equipadas com o conjunto de equipamentos e materiais estabelecidos inerentes ao Plano de Emergência de Navios para Poluição por Óleo (Shipboard Oil Pollution Emergency Plan - SOPEP, em inglês), conforme definido na Convenção Internacional para a Prevenção da Poluição Causada por Navios, concluída em Londres, em 2 de novembro de 1973, seu Protocolo, concluído em Londres, em 17 de fevereiro de 1998, suas Emendas de 1984 e seus anexos Operacionais III, IV e V, promulgada no Brasil por meio do Decreto nº 2.508, de 4 de março de 1998. Republicada por ter saído com incorreção, do original, no Diário Oficial da União de 27 de fevereiro de 2002, Seção 1, págs. 128 a 133.  
+
+    **VII -** A expressão "1,5 + velocidade máxima da corrente em nós x largura do corpo hídrico, em metros", contida no Anexo III da Resolução CONAMA nº 398/2008, foi alterada neste software para "(1,5 + velocidade máxima da corrente em nós) x largura do corpo hídrico, em metros", por questão de coerência.  
+
+    **VIII -** Recomenda-se leitura atenta da Resolução CONAMA nº 398/2008, para consideração de situações particulares especificadas.
+    """)
+st.sidebar.markdown("---")
