@@ -71,7 +71,18 @@ if tipo_instalacao == "Tanques, equipamentos de processo e navios":
     Vpc = v1a
 
 elif tipo_instalacao == "Dutos":
-    t1b = st.sidebar.number_input("Tempo T1 (h):", min_value=0.0, value=0.0)
+    t1b = st.sidebar.number_input("Tempo T1 (h):", min_value=0.0, value=0.0,
+        help="""
+        **$Vpc = (T1 + T2) \times Q1 + V1$, onde:**  
+        **Vpc** - volume do derramamento correspondente à descarga de pior caso  
+        **T1** - tempo estimado para detecção do derramamento  
+        **T2** - tempo estimado entre a detecção do derramamento e a interrupção da operação de transferência  
+        **Q1** - vazão máxima de operação do duto  
+        **V1** - volume remanescente na seção do duto, após a interrupção da operação de transferência 
+        
+        *(1) O volume V1 poderá ser reduzido, mediante justificativa técnica a ser apresentada pelo empreendedor e aprovada pelo órgão ambiental competente.*
+        """
+                                 )
     t2b = st.sidebar.number_input("Tempo T2 (h):", min_value=0.0, value=0.0)
     q1b = st.sidebar.number_input("Vazão Q1 (m³/h):", min_value=0.0, value=0.0)
     v1b = st.sidebar.number_input("Volume V1 (m³):", min_value=0.0, value=0.0)
