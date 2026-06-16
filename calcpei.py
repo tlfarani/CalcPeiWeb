@@ -125,7 +125,6 @@ elif tipo_instalacao == "Instalações terrestres de produção":
         **Vpc = V1, onde**:  
         
         **Vpc** — volume do derramamento correspondente ao cenário de pior caso 
-        
         **V1** — volume diário estimado $$^{(1)}$$ decorrente da perda de controle do poço de maior vazão associado à instalação x 30 dias 
         
         *(1) Para estimativa do volume diário decorrente da perda de controle do poço deverão ser consideradas as características conhecidas do reservatório. A estimativa do volume diário deverá ser acompanhada de justificativa técnica.*
