@@ -175,7 +175,7 @@ comprimento = st.sidebar.number_input("Comprimento do navio/fonte (m):", min_val
 st.sidebar.caption("""Contenção da mancha de óleo: 
 De acordo com o cálculo da capacidade efetiva diária de recolhimento de óleo - CEDRO (Fonte: Petrobras 2011)
 """,
-                  help=""Teste"")
+                  help="""Teste""")
 
 largura = st.sidebar.number_input("Largura do corpo hídrico (m):", min_value=0.0, value=0.0,
         help="""
