@@ -194,13 +194,8 @@ if st.sidebar.button("Calcular Dimensionamento", type="primary"):
                 ]
             })
             
-            # Força o alinhamento central no cabeçalho (th) e nas células (td)
-            styled_barreiras = df_barreiras.style.set_table_styles([
-                {'selector': 'th', 'props': [('text-align', 'center')]},
-                {'selector': 'td', 'props': [('text-align', 'center')]}
-            ]).set_properties(**{'text-align': 'center'})
-            
-            st.table(styled_barreiras)
+            # O CSS global do topo já vai centralizar automaticamente aqui
+            st.table(df_barreiras)
 
             # --- TABELA 2: RECOLHEDORES ---
             st.subheader("Capacidade de Recolhimento e Armazenamento Temporário")
@@ -225,11 +220,4 @@ if st.sidebar.button("Calcular Dimensionamento", type="primary"):
                 }
                 
             df_recolhedores = pd.DataFrame(dados_recolhedores)
-            
-            # Força o alinhamento central total na tabela dinâmica de recolhedores
-            styled_recolhedores = df_recolhedores.style.set_table_styles([
-                {'selector': 'th', 'props': [('text-align', 'center')]},
-                {'selector': 'td', 'props': [('text-align', 'center')]}
-            ]).set_properties(**{'text-align': 'center'})
-            
-            st.table(styled_recolhedores)
+            st.table(df_recolhedores)
