@@ -32,8 +32,8 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- PASSO 1: ENTRADA DE DADOS (Substituindo os Radio Buttons do VB) ---
-st.sidebar.header("1. Parâmetros de Entrada")
+# --- 1. FONTE POTENCIAL DE RISCO ---
+st.sidebar.header("1. Fonte Potencial de Risco")
 
 tipo_instalacao = st.sidebar.selectbox(
     "Tipo de Instalação / Fonte de Risco:",
@@ -48,9 +48,12 @@ tipo_instalacao = st.sidebar.selectbox(
     ]
 )
 
-# Renderização dinâmica dos campos de volume baseada na seleção (Substituindo gpxA, gpxB, etc.)
+# --- 2. VOLUME DE PIOR CASO ---
+st.sidebar.header("2. Volume de Pior Caso")
+
 Vpc = 0.0
 
+# Renderização dinâmica dos inputs de volume baseada no Passo 1
 if tipo_instalacao == "Tanques, equipamentos de processo e navios":
     v1a = st.sidebar.number_input(
         "Volume V1 (m³):", 
@@ -58,9 +61,8 @@ if tipo_instalacao == "Tanques, equipamentos de processo e navios":
         value=0.0, 
         step=1.0,
         help="""
-        **Volume correspondente à descarga de pior caso** 
+        **Volume correspondente à descarga de pior caso** $Vpc = V1$, onde:  
         
-        * **Vpc = V1, onde:**  
         * **Vpc** — volume do derramamento correspondente à descarga de pior caso  
         * **V1** — capacidade máxima do tanque, equipamento de processo ou reservatório de maior capacidade (1)  
         
@@ -99,8 +101,8 @@ elif tipo_instalacao == "Plataformas de armazenamento associadas a plataformas d
     v1g = st.sidebar.number_input("Volume V1 (m³):", min_value=0.0, value=0.0)
     Vpc = v1g
 
-# --- PASSO 2: LOCAL E GEOMETRIA ---
-st.sidebar.subheader("2. Local do Derramamento")
+# --- 3. LOCAL DO DERRAMAMENTO ---
+st.sidebar.header("3. Local do Derramamento")
 local = st.sidebar.radio(
     "Ambiente:",
     ["Zona Costeira, lagos, represas e outros lenticos", 
@@ -108,7 +110,8 @@ local = st.sidebar.radio(
      "Águas marítimas além da Zona Costeira"]
 )
 
-st.sidebar.subheader("3. Características Geométricas")
+# --- 4. ESTRATÉGIA DE RESPOSTA ---
+st.sidebar.header("4. Estratégia de Resposta")
 comprimento = st.sidebar.number_input("Comprimento do navio/fonte (m):", min_value=0.0, value=0.0)
 largura = st.sidebar.number_input("Largura do corpo hídrico (m):", min_value=0.0, value=0.0)
 velocidade = st.sidebar.number_input("Velocidade máxima da corrente (nós/m/s):", min_value=0.0, value=0.0)
