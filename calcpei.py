@@ -90,7 +90,14 @@ elif tipo_instalacao == "Dutos":
     Vpc = (t1b + t2b) * q1b + v1b
 
 elif tipo_instalacao == "Plataformas de perfuração exploratória ou de desenvolvimento":
-    v1c = st.sidebar.number_input("Volume V1 (m³):", min_value=0.0, value=0.0)
+    v1c = st.sidebar.number_input("Volume V1 (m³):", min_value=0.0, value=0.0,
+        help="""
+        **Vpc = V1, onde**:
+        **Vpc** = volume do derramamento correspondente à descarga de pior caso  
+        **V1** = volume diário estimado (1) decorrente da perda de controle do poço x 30 dias  
+        
+        *(1) Para estimativa do volume diário decorrente da perda de controle do poço deverão ser consideradas as características conhecidas do reservatório. Se estas características forem desconhecidas, devem ser consideradas as características de reservatórios análogos. A estimativa do volume diário deverá ser acompanhada de justificativa técnica.*  
+                                  """)                                 )
     Vpc = v1c
 
 elif tipo_instalacao == "Plataformas de produção":
