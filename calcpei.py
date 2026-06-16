@@ -132,7 +132,15 @@ elif tipo_instalacao == "Instalações terrestres de produção":
     Vpc = v1e
 
 elif tipo_instalacao == "Operações de carga e descarga":
-    t1f = st.sidebar.number_input("Tempo T1 (h):", min_value=0.0, value=0.0)
+    t1f = st.sidebar.number_input("Tempo T1 (h):", min_value=0.0, value=0.0,
+        help=r"""
+        $Vpc = (T1 + T2) \times Q1$,
+        **Onde:**  
+        **Vpc** - volume do derramamento correspondente à descarga de pior caso  
+        **T1** - tempo estimado para detecção do derramamento  
+        **T2** - tempo estimado entre a detecção e a interrupção do derramamento  
+        **Q1** - vazão máxima de operação.
+        """)
     t2f = st.sidebar.number_input("Tempo T2 (h):", min_value=0.0, value=0.0)
     q1f = st.sidebar.number_input("Vazão Q1 (m³/h):", min_value=0.0, value=0.0)
     Vpc = (t1f + t2f) * q1f
