@@ -52,7 +52,20 @@ tipo_instalacao = st.sidebar.selectbox(
 Vpc = 0.0
 
 if tipo_instalacao == "Tanques, equipamentos de processo e navios":
-    v1a = st.sidebar.number_input("Volume V1 (m³):", min_value=0.0, value=0.0, step=1.0)
+    v1a = st.sidebar.number_input(
+        "Volume V1 (m³):", 
+        min_value=0.0, 
+        value=0.0, 
+        step=1.0,
+        help="""
+        **Volume correspondente à descarga de pior caso** $Vpc = V1$, onde:  
+        
+        * **Vpc** — volume do derramamento correspondente à descarga de pior caso  
+        * **V1** — capacidade máxima do tanque, equipamento de processo ou reservatório de maior capacidade (1)  
+        
+        *(1) No caso de tanques que operem equalizados, deverá ser considerada a soma da capacidade máxima dos tanques.*
+        """
+    )
     Vpc = v1a
 
 elif tipo_instalacao == "Dutos":
