@@ -58,8 +58,9 @@ if tipo_instalacao == "Tanques, equipamentos de processo e navios":
         value=0.0, 
         step=1.0,
         help="""
-        **Volume correspondente à descarga de pior caso** $Vpc = V1$, onde:  
+        **Volume correspondente à descarga de pior caso** 
         
+        * **Vpc = V1, onde:**  
         * **Vpc** — volume do derramamento correspondente à descarga de pior caso  
         * **V1** — capacidade máxima do tanque, equipamento de processo ou reservatório de maior capacidade (1)  
         
