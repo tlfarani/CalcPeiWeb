@@ -157,11 +157,13 @@ if st.sidebar.button("Calcular Dimensionamento", type="primary"):
         Absorventes_total = Cerco + Cont3 + Protecao + linha_protecao
 
         # --- EXIBIÇÃO DOS RESULTADOS (Substituindo o Form2) ---
-        st.header("Resultados do Dimensionamento Mínimo")
-        
-        col_a, col_b = st.columns(2)
-        col_a.metric("Volume de Pior Caso Calculado (Vpc)", f"{Vpc:.4f} m³")
-        col_b.info(f"**Ambiente:** {local}")
+        # Em vez de apenas jogar o texto, use um container para agrupar visualmente
+        with st.container(border=True):
+            st.subheader("Resultados do Dimensionamento Mínimo")
+            
+            col_a, col_b = st.columns(2)
+            col_a.metric("Volume de Pior Caso Calculado (Vpc)", f"{Vpc:.4f} m³")
+            col_b.info(f"**Ambiente:** {local}")
 
         # Aba de Barreiras e Materiais
         st.subheader("Barreiras e Materiais Absorventes")
