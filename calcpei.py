@@ -17,6 +17,15 @@ st.set_page_config(page_title="CalcPEI - Mac & Nuvem", page_icon="💧", layout=
 st.title("Calculadora PEI (CalcPEI)")
 st.caption("Dimensionamento de Capacidade Mínima de Resposta - Resolução CONAMA nº 398/2008")
 
+# --- FORÇAR CENTRALIZAÇÃO DAS TABELAS ---
+st.markdown("""
+    <style>
+    [data-testid="stTable"] th, [data-testid="stTable"] td {
+        text-align: center !important;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 # --- PASSO 1: ENTRADA DE DADOS (Substituindo os Radio Buttons do VB) ---
 st.sidebar.header("1. Parâmetros de Entrada")
 
