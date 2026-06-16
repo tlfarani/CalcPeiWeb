@@ -166,7 +166,10 @@ local = st.sidebar.radio(
 
 # --- 4. ESTRATÉGIA DE RESPOSTA ---
 st.sidebar.header("4. Estratégia de Resposta")
-comprimento = st.sidebar.number_input("Comprimento do navio/fonte (m):", min_value=0.0, value=0.0)
+comprimento = st.sidebar.number_input("Comprimento do navio/fonte (m):", min_value=0.0, value=0.0,
+        help="""
+        Cerco completo do navio ou da fonte de derramamento
+        """)
 
 # Nota informativa fixa da imagem anexa
 st.sidebar.caption("""Contenção da mancha de óleo: 
