@@ -103,7 +103,7 @@ elif tipo_instalacao == "Plataformas de perfuração exploratória ou de desenvo
 elif tipo_instalacao == "Plataformas de produção":
     v1d = st.sidebar.number_input("Volume V1 (m³):", min_value=0.0, value=0.0,
         help=r"""
-        $Vpc = V1 + V2 \exp{(2)}$ 
+        $$Vpc = V1 + V2^{(2)}$$
         **Onde:**  
         **Vpc** - volume do derramamento correspondente à descarga de pior caso  
         **V1** - soma da capacidade máxima de todos os tanks de estocagem e tubulações da plataforma  
