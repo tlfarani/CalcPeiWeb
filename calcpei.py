@@ -174,11 +174,21 @@ comprimento = st.sidebar.number_input("Comprimento do navio/fonte (m):", min_val
 # Nota informativa fixa da imagem anexa
 st.sidebar.caption("""Contenção da mancha de óleo: 
 De acordo com o cálculo da capacidade efetiva diária de recolhimento de óleo - CEDRO (Fonte: Petrobras 2011)
-""")
+""",
+                  help=""Teste"")
 
-largura = st.sidebar.number_input("Largura do corpo hídrico (m):", min_value=0.0, value=0.0)
-velocidade = st.sidebar.number_input("Velocidade máxima da corrente (nós/m/s):", min_value=0.0, value=0.0)
-linha_protecao = st.sidebar.number_input("Comprimento da linha de proteção (m):", min_value=0.0, value=0.0)
+largura = st.sidebar.number_input("Largura do corpo hídrico (m):", min_value=0.0, value=0.0,
+        help="""
+        Cerco completo do navio ou da fonte de derramamento
+        """)
+velocidade = st.sidebar.number_input("Velocidade máxima da corrente (nós/m/s):", min_value=0.0, value=0.0,
+        help="""
+        Cerco completo do navio ou da fonte de derramamento
+        """)
+linha_protecao = st.sidebar.number_input("Comprimento da linha de proteção (m):", min_value=0.0, value=0.0,
+        help="""
+        Cerco completo do navio ou da fonte de derramamento
+        """)
 
 # --- PASSO 3: BOTÃO DE CÁLCULO E LÓGICA MATEMÁTICA ---
 if st.sidebar.button("Calcular Dimensionamento", type="primary"):
