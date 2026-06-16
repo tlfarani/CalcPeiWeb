@@ -2,6 +2,15 @@ import streamlit as st
 import pandas as pd
 import math
 
+def fmt_br(valor, casas=2):
+    """Formata um número para o padrão brasileiro (ex: 1.234,56)"""
+    if valor is None:
+        return "-"
+    # Formata no padrão americano com vírgula no milhar: 1,234,567.89
+    string_formatada = f"{valor:,.{casas}f}"
+    # Inverte os separadores usando um marcador temporário
+    return string_formatada.replace(",", "TEMP").replace(".", ",").replace("TEMP", ".")
+
 # Configuração inicial da página
 st.set_page_config(page_title="CalcPEI - Mac & Nuvem", page_icon="💧", layout="wide")
 
@@ -76,10 +85,9 @@ largura = st.sidebar.number_input("Largura do corpo hídrico (m):", min_value=0.
 velocidade = st.sidebar.number_input("Velocidade máxima da corrente (nós/m/s):", min_value=0.0, value=0.0)
 linha_protecao = st.sidebar.number_input("Comprimento da linha de proteção (m):", min_value=0.0, value=0.0)
 
-# --- PASSO 3: BOTÃO DE CÁLCULO E LOGICA MATEMÁTICA ---
+# --- PASSO 3: BOTÃO DE CÁLCULO E LÓGICA MATEMÁTICA ---
 if st.sidebar.button("Calcular Dimensionamento", type="primary"):
     
-    # Validação simples de segurança
     if Vpc == 0:
         st.error("O Volume de Pior Caso (Vpc) não pode ser zero. Verifique os dados de entrada.")
     else:
@@ -139,64 +147,80 @@ if st.sidebar.button("Calcular Dimensionamento", type="primary"):
         # 3. Cálculos de Barreiras
         Cerco = round(3 * comprimento)
         
-        # Determinação das barreiras de contenção da mancha (Cont3) baseado no CNRdpc3
         if CNRdpc3 <= 50: Cont3 = 100.0
         elif CNRdpc3 <= 100: Cont3 = 200.0
         elif CNRdpc3 <= 200: Cont3 = 250.0
         elif CNRdpc3 <= 250: Cont3 = 300.0
         else: Cont3 = 400.0
 
-        # Barreiras de Proteção
         if 3.5 * largura >= (1.5 + velocidade) * largura:
             Protecao = round(3.5 * largura)
         else:
             Protecao = round((1.5 + velocidade) * largura)
         if Protecao >= 350: Protecao = 350.0
 
-        # Absorventes Totais
         Absorventes_total = Cerco + Cont3 + Protecao + linha_protecao
 
-        # --- EXIBIÇÃO DOS RESULTADOS (Substituindo o Form2) ---
-        # Em vez de apenas jogar o texto, use um container para agrupar visualmente
+        # --- EXIBIÇÃO DOS RESULTADOS FORMATADOS ---
         with st.container(border=True):
-            st.subheader("Resultados do Dimensionamento Mínimo")
+            st.header("Resultados do Dimensionamento Mínimo")
             
             col_a, col_b = st.columns(2)
-            col_a.metric("Volume de Pior Caso Calculado (Vpc)", f"{Vpc:.4f} m³")
+            # Aplicando a formatação BR com 4 casas decimais para o VPC como estava no VB
+            col_a.metric("Volume de Pior Caso Calculado (Vpc)", f"{fmt_br(Vpc, 4)} m³")
             col_b.info(f"**Ambiente:** {local}")
 
-        # Aba de Barreiras e Materiais
-        st.subheader("Barreiras e Materiais Absorventes")
-        df_barreiras = pd.DataFrame({
-            "Item": [
-                "Barreiras de Cerco (m)", "Barreiras de Contenção da Mancha (m)", 
-                "Barreiras de Proteção (m)", "Barreiras para Áreas Sensíveis (m)",
-                "Barreiras Absorventes Totais (m)", "Mantas Absorventes (unid/m)"
-            ],
-            "Quantidade Mínima": [Cerco, Cont3, Protecao, linha_protecao, Absorventes_total, Absorventes_total]
-        })
-        st.table(df_barreiras)
-
-        # Aba de Recolhedores (Substituindo a DataGridView do Form2)
-        st.subheader("Capacidade de Recolhimento e Armazenamento Temporário")
-        
-        if Vpc <= 8:
-            dados_recolhedores = {
-                "Classe de Descarga": ["Pequena", "Média", "Pior Caso (Nível 1)", "Pior Caso (Nível 2)", "Pior Caso (Nível 3)"],
-                "Volume da Mancha": [f"{Vpc:.2f} m³", "-", "-", "-", "-"],
-                "Tempo Limite": ["Até 2h", "-", "-", "-", "-"],
-                "Capac. Recolhimento Diário": [f"{Vpc:.2f} m³/dia", "-", "-", "-", "-"],
-                "Capac. Nominal Mínima (CNR)": [f"{CNRdp:.2f} m³/h", "-", "-", "-", "-"],
-                "Armazenamento Temporário": [f"{Armazdp:.2f} m³", "-", "-", "-", "-"]
-            }
-        else:
-            dados_recolhedores = {
-                "Classe de Descarga": ["Pequena", "Média", "Pior Caso (Nível 1)", "Pior Caso (Nível 2)", "Pior Caso (Nível 3)"],
-                "Volume da Mancha": [f"8.00 m³", f"{Vpcm:.2f} m³", f"{Vpc:.2f} m³", f"{Vpc:.2f} m³", f"{Vpc:.2f} m³"],
-                "Tempo Limite": ["Até 2h", "Até 6h", "Até 12h", "Até 36h", "Até 60h"],
-                "Capac. Recolhimento Diário": [f"8.00 m³/dia", f"{Cdm:.2f} m³/dia", f"{Cdpc1:.2f} m³/dia", f"{Cdpc2:.2f} m³/dia", f"{Cdpc3:.2f} m³/dia"],
-                "Capac. Nominal Mínima (CNR)": [f"{CNRdp:.2f} m³/h", f"{CNRdm:.2f} m³/h", f"{CNRdpc1:.2f} m³/h", f"{CNRdpc2:.2f} m³/h", f"{CNRdpc3:.2f} m³/h"],
-                "Armazenamento Temporário": [f"{Armazdp:.2f} m³", f"{Armazdm:.2f} m³", f"{Armazdpc1:.2f} m³", f"{Armazdpc2:.2f} m³", f"{Armazdpc3:.2f} m³"]
-            }
+            # --- TABELA 1: BARREIRAS ---
+            st.subheader("Barreiras e Materiais Absorventes")
             
-        st.dataframe(pd.DataFrame(dados_recolhedores), hide_index=True)
+            df_barreiras = pd.DataFrame({
+                "Item": [
+                    "Barreiras de Cerco (m)", "Barreiras de Contenção da Mancha (m)", 
+                    "Barreiras de Proteção (m)", "Barreiras para Áreas Sensíveis (m)",
+                    "Barreiras Absorventes Totais (m)", "Mantas Absorventes (unid/m)"
+                ],
+                "Quantidade Mínima": [
+                    fmt_br(Cerco, 0), fmt_br(Cont3, 0), fmt_br(Protecao, 0), 
+                    fmt_br(linha_protecao, 0), fmt_br(Absorventes_total, 0), fmt_br(Absorventes_total, 0)
+                ]
+            })
+            
+            # Força o alinhamento central no cabeçalho (th) e nas células (td)
+            styled_barreiras = df_barreiras.style.set_table_styles([
+                {'selector': 'th', 'props': [('text-align', 'center')]},
+                {'selector': 'td', 'props': [('text-align', 'center')]}
+            ]).set_properties(**{'text-align': 'center'})
+            
+            st.table(styled_barreiras)
+
+            # --- TABELA 2: RECOLHEDORES ---
+            st.subheader("Capacidade de Recolhimento e Armazenamento Temporário")
+            
+            if Vpc <= 8:
+                dados_recolhedores = {
+                    "Classe de Descarga": ["Pequena", "Média", "Pior Caso (Nível 1)", "Pior Caso (Nível 2)", "Pior Caso (Nível 3)"],
+                    "Volume da Mancha": [f"{fmt_br(Vpc)} m³", "-", "-", "-", "-"],
+                    "Tempo Limite": ["Até 2h", "-", "-", "-", "-"],
+                    "Capac. Recolhimento Diário": [f"{fmt_br(Vpc)} m³/dia", "-", "-", "-", "-"],
+                    "Capac. Nominal Mínima (CNR)": [f"{fmt_br(CNRdp)} m³/h", "-", "-", "-", "-"],
+                    "Armazenamento Temporário": [f"{fmt_br(Armazdp)} m³", "-", "-", "-", "-"]
+                }
+            else:
+                dados_recolhedores = {
+                    "Classe de Descarga": ["Pequena", "Média", "Pior Caso (Nível 1)", "Pior Caso (Nível 2)", "Pior Caso (Nível 3)"],
+                    "Volume da Mancha": ["8,00 m³", f"{fmt_br(Vpcm)} m³", f"{fmt_br(Vpc)} m³", f"{fmt_br(Vpc)} m³", f"{fmt_br(Vpc)} m³"],
+                    "Tempo Limite": ["Até 2h", "Até 6h", "Até 12h", "Até 36h", "Até 60h"],
+                    "Capac. Recolhimento Diário": ["8,00 m³/dia", f"{fmt_br(Cdm)} m³/dia", f"{fmt_br(Cdpc1)} m³/dia", f"{fmt_br(Cdpc2)} m³/dia", f"{fmt_br(Cdpc3)} m³/dia"],
+                    "Capac. Nominal Mínima (CNR)": [f"{fmt_br(CNRdp)} m³/h", f"{fmt_br(CNRdm)} m³/h", f"{fmt_br(CNRdpc1)} m³/h", f"{fmt_br(CNRdpc2)} m³/h", f"{fmt_br(CNRdpc3)} m³/h"],
+                    "Armazenamento Temporário": [f"{fmt_br(Armazdp)} m³", f"{fmt_br(Armazdm)} m³", f"{fmt_br(Armazdpc1)} m³", f"{fmt_br(Armazdpc2)} m³", f"{fmt_br(Armazdpc3)} m³"]
+                }
+                
+            df_recolhedores = pd.DataFrame(dados_recolhedores)
+            
+            # Força o alinhamento central total na tabela dinâmica de recolhedores
+            styled_recolhedores = df_recolhedores.style.set_table_styles([
+                {'selector': 'th', 'props': [('text-align', 'center')]},
+                {'selector': 'td', 'props': [('text-align', 'center')]}
+            ]).set_properties(**{'text-align': 'center'})
+            
+            st.table(styled_recolhedores)
