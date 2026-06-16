@@ -112,7 +112,7 @@ elif tipo_instalacao == "Plataformas de produção":
         *(1) Inclui produção para pesquisa e teste de longa duração, conforme Resolução CONAMA 23/94 e portarias da ANP relacionadas.*
         *(2) Quando a perda de controle do poço não comprometer a estocagem da plataforma, Vpc é igual ao maior valor entre V1 e V2.*  
         *(3) A estimativa do volume diário deverá ser acompanhada de justificativa técnica.*
-        """)                                ))
+        """)                               
     v2d = st.sidebar.number_input("Volume V2 (m³):", min_value=0.0, value=0.0)
     Vpc = v1d + v2d
 
